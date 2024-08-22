@@ -4,6 +4,7 @@ const newChatForm = document.querySelector('.new-chat');
 const newNameForm = document.querySelector('.new-name');
 const updateMsg = document.querySelector('.update-mssg');
 const rooms = document.querySelector('.chat-rooms');
+const addRoom = document.querySelector('.new-room')
 
 //ADD A NEW CHAT
 
@@ -32,6 +33,14 @@ newNameForm.addEventListener('submit', e => {
 }
 )
 
+//ADD A NEW CHATROOM
+// addRoom.addEventListener('submit', e => {
+//     e.preventDefault();
+//     const text = e.target
+//     room.innerHTML =   
+// })
+
+
 // CHECK LOCAL STORAGE FOR A NAME
 const username = localStorage.username ? localStorage.username : 'anon';
 
@@ -40,7 +49,7 @@ rooms.addEventListener('click', e => {
     if(e.target.tagName === 'BUTTON'){
         chatUI.clear();
         chatroom.updateRoom(e.target.getAttribute('id'));
-        chatroom.getChats(chat => chatUI.render(chat));x
+        chatroom.getChats(chat => chatUI.render(chat));
     }
 })
 

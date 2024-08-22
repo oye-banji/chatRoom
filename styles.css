@@ -1,9 +1,12 @@
+/* .bod{
+    background-color: rgb(196, 238, 247);
+} */
 .container{
     max-width: 600px;
+    
   }
   .btn{
-    background: #43d9be;
-    color: white;
+    color: black;
     outline: none !important;
     box-shadow: none !important;
   }
