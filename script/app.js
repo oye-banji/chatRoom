@@ -32,8 +32,10 @@ newNameForm.addEventListener('submit', e => {
 addRoom.addEventListener('submit', e => {
     e.preventDefault();
     const text = addRoom.room.value.trim()
-    const html = ` <button type="button" class="btn btn-outline-danger">${text}</button>`
+    const html = `  <button class="btn btn-outline-danger" id="${text}">#${text}</button>`
+    
     rooms.innerHTML += html;
+    chatroom.updateRoom(text)
     addRoom.reset();
 });
 
@@ -50,10 +52,17 @@ rooms.addEventListener('click', e => {
 
 // check local storage for name
 const username = localStorage.username ? localStorage.username : 'anon';
+const room = localStorage.room ? localStorage.room : 'general';
+
+
 
 // class instances
-const chatUI = new ChatUI(chatList);
-const chatroom = new Chatroom('gaming', username);
+const chatUI = new ChatUI(chatList, rooms);
+const chatroom = new Chatroom('general', username);
+
 
 // get chats & render
 chatroom.getChats(data => chatUI.render(data));
+
+//test
+chatroom.getRooms(data => chatUI.renderRooms(data));

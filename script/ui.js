@@ -3,8 +3,10 @@
 
 
 class ChatUI {
-    constructor(list){
+    constructor(list, roomList){
         this.list = list;
+        this.roomList = roomList;
+        this.al;
     }
     clear(){
         this.list.innerHTML = '';
@@ -22,5 +24,12 @@ class ChatUI {
         `;
 
         this.list.innerHTML += html;
+    }
+    renderRooms(data){
+        
+        const html = `
+            <button class="btn btn-outline-danger" id="${data.room}">#${data.room}</button>
+            `       
+        this.roomList.innerHTML += html;
     }
 }

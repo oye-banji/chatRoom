@@ -9,6 +9,7 @@ class Chatroom {
         this.username = username;
         this.chats = db.collection('chats');
         this.unsub;
+        this.arr = [];
     }
     async addChat(message){
         //format a chat object
@@ -36,6 +37,19 @@ class Chatroom {
             });
         });
     }
+    getRooms(callback){
+        this.chats.onSnapshot(snapshot => {
+            snapshot.docChanges().forEach(change => {
+                // this.arr += change.doc.data().room 
+                if(!this.arr.includes(change.doc.data().room)){// it never runs this function
+                    this.arr+= change.doc.data().room
+                    callback(change.doc.data())
+                }else{console.log("room already added")}
+                
+            });
+            
+        })
+    }
     updateName(username){//takes in a string
         this.username = username;
         localStorage.setItem('username', username);
@@ -43,6 +57,7 @@ class Chatroom {
     updateRoom(room){//takes in a string
         this.room = room;
         console.log('room updated');
+        localStorage.setItem('room', room)
         if(this.unsub){
             this.unsub();
         }
