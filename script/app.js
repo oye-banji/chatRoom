@@ -1,62 +1,59 @@
-// DOM QUERIES
+// dom queries
 const chatList = document.querySelector('.chat-list');
 const newChatForm = document.querySelector('.new-chat');
 const newNameForm = document.querySelector('.new-name');
-const updateMsg = document.querySelector('.update-mssg');
+const updateMssg = document.querySelector('.update-mssg');
 const rooms = document.querySelector('.chat-rooms');
 const addRoom = document.querySelector('.new-room')
 
-//ADD A NEW CHAT
-
+// add a new chat
 newChatForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const message = newChatForm.message.value.trim();
-    chatroom.addChat(message)
-        .then(() => newChatForm.reset())
-        .catch(err => console.log(err))
-}
-)
+  e.preventDefault();
+  const message = newChatForm.message.value.trim();
+  chatroom.addChat(message)
+    .then(() => newChatForm.reset())
+    .catch(err => console.log(err));
+});
 
-//UPDATE USERNAME
+// update the username
 newNameForm.addEventListener('submit', e => {
-    e.preventDefault();
-
-    //UPDATE NAME VIA THE CHATROOM CLASS
-    let newName = newNameForm.name.value.trim();
-    chatroom.updateName(newName);
-    newNameForm.reset();
-
-    //SHOW AND HIDE THE UPDATE MESSAGE
-
-    updateMsg.innerText = `Your name was updated to ${newName}`
-    setTimeout(() => updateMsg.innerText = '', 3000)
-}
-)
+  e.preventDefault();
+  // update name via chatroom
+  const newName = newNameForm.name.value.trim();
+  chatroom.updateName(newName);
+  // reset the form
+  newNameForm.reset();
+  // show then hide the update message
+  updateMssg.innerText = `Your name was updated to ${newName}`;
+  setTimeout(() => updateMssg.innerText = '', 3000);
+});
 
 //ADD A NEW CHATROOM
-// addRoom.addEventListener('submit', e => {
-//     e.preventDefault();
-//     const text = e.target
-//     room.innerHTML =   
-// })
+addRoom.addEventListener('submit', e => {
+    e.preventDefault();
+    const text = addRoom.room.value.trim()
+    const html = ` <button type="button" class="btn btn-outline-danger">${text}</button>`
+    rooms.innerHTML += html;
+    addRoom.reset();
+});
+
+// update the chat room
+rooms.addEventListener('click', e => {
+  if(e.target.tagName === 'BUTTON'){
+    chatUI.clear();
+    chatroom.updateRoom(e.target.getAttribute('id'));
+    chatroom.getChats(chat => chatUI.render(chat));
+  }
+});
 
 
-// CHECK LOCAL STORAGE FOR A NAME
+
+// check local storage for name
 const username = localStorage.username ? localStorage.username : 'anon';
 
-//UPDATE THE CHAT ROOM
-rooms.addEventListener('click', e => {
-    if(e.target.tagName === 'BUTTON'){
-        chatUI.clear();
-        chatroom.updateRoom(e.target.getAttribute('id'));
-        chatroom.getChats(chat => chatUI.render(chat));
-    }
-})
+// class instances
+const chatUI = new ChatUI(chatList);
+const chatroom = new Chatroom('gaming', username);
 
-
-//CLASS INSTANCES
-const chatUI = new ChatUI(chatList)
-const chatroom = new Chatroom('general', username);
-
-// GET CHATS AND RENDER
+// get chats & render
 chatroom.getChats(data => chatUI.render(data));
