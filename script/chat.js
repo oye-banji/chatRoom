@@ -40,15 +40,17 @@ class Chatroom {
     getRooms(callback){
         this.chats.onSnapshot(snapshot => {
             snapshot.docChanges().forEach(change => {
-                // this.arr += change.doc.data().room 
-                if(!this.arr.includes(change.doc.data().room)){// it never runs this function
-                    this.arr+= change.doc.data().room
+                this.arr += change.doc.data().room 
+                let tempRoom = change.doc.data().room
+                if(!this.arr.includes(tempRoom)){// it never runs this function
+                    console.log('testing');
+                    this.arr+= tempRoom;
                     callback(change.doc.data())
                 }else{console.log("room already added")}
                 
             });
             
-        })
+        });
     }
     updateName(username){//takes in a string
         this.username = username;

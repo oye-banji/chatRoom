@@ -31,10 +31,10 @@ newNameForm.addEventListener('submit', e => {
 //ADD A NEW CHATROOM
 addRoom.addEventListener('submit', e => {
     e.preventDefault();
-    const text = addRoom.room.value.trim()
-    const html = `  <button class="btn btn-outline-danger" id="${text}">#${text}</button>`
-    
+    const text = addRoom.room.value.trim();
+    const html = `  <button class="btn btn-outline-danger " id="${text}">#${text}</button>`
     rooms.innerHTML += html;
+   
     chatroom.updateRoom(text)
     addRoom.reset();
 });

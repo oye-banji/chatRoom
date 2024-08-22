@@ -16,8 +16,9 @@ class ChatUI {
             new Date(data.created_at.toDate()),
             {addSuffix: true}
           )
+
         const html = `
-            <li class="list-group-item">
+            <li class="list-group-item --bs-success-border-subtle ">
                 <span class="username">${data.username}: </span>
                 <span class="message">${data.message}</span>
                 <div class="time">${when}</div>
