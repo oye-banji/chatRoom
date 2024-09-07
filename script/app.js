@@ -4,8 +4,8 @@ const newChatForm = document.querySelector('.new-chat');
 const newNameForm = document.querySelector('.new-name');
 const updateMssg = document.querySelector('.update-mssg');
 const rooms = document.querySelector('.chat-rooms');
-const addRoom = document.querySelector('.new-room')
-
+const addRoomForm = document.querySelector('.new-room')
+const tab = document.querySelector('.content')
 // add a new chat
 newChatForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -28,16 +28,29 @@ newNameForm.addEventListener('submit', e => {
   setTimeout(() => updateMssg.innerText = '', 3000);
 });
 
-//ADD A NEW CHATROOM
-addRoom.addEventListener('submit', e => {
-    e.preventDefault();
-    const text = addRoom.room.value.trim();
-    const html = `  <button class="btn btn-outline-danger " id="${text}">#${text}</button>`
-    rooms.innerHTML += html;
-   
-    chatroom.updateRoom(text)
-    addRoom.reset();
+// Add a new chatroom to the database
+addRoomForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const text = addRoomForm.room.value.trim();
+
+  try {
+      const exists = await chatroom.checker(text);
+      if (exists) {
+          await chatroom.addRoom(text);
+          chatroom.updateRoom(text);
+          chatroom.getRoom(room => chatUI.renderRooms(room), text);
+          addRoomForm.reset();
+      } else {
+          console.log('Room already exists');
+      }
+  } catch (err) {
+      console.error('Error adding room:', err);
+  }
 });
+
+const html = `<p> hello </p>`;
+
+
 
 // update the chat room
 rooms.addEventListener('click', e => {
@@ -50,19 +63,25 @@ rooms.addEventListener('click', e => {
 
 
 
+
+
+
+
 // check local storage for name
 const username = localStorage.username ? localStorage.username : 'anon';
 const room = localStorage.room ? localStorage.room : 'general';
 
 
 
+
 // class instances
-const chatUI = new ChatUI(chatList, rooms);
+const chatUI = new ChatUI(chatList, rooms, tab);
 const chatroom = new Chatroom('general', username);
 
 
 // get chats & render
 chatroom.getChats(data => chatUI.render(data));
+chatroom.list_rooms(data => chatUI.renderList_rooms(data))
 
 //test
-chatroom.getRooms(data => chatUI.renderRooms(data));
+//chatroom.getRoom(allRooms => chatUI.renderRooms(allRooms));

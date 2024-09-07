@@ -3,10 +3,10 @@
 
 
 class ChatUI {
-    constructor(list, roomList){
+    constructor(list, roomList, listOfRooms){
         this.list = list;
         this.roomList = roomList;
-        this.al;
+        this.listOfRooms = listOfRooms
     }
     clear(){
         this.list.innerHTML = '';
@@ -18,7 +18,7 @@ class ChatUI {
           )
 
         const html = `
-            <li class="list-group-item --bs-success-border-subtle ">
+            <li class="list-group-item bg-secondary-subtle border border-secondary ">
                 <span class="username">${data.username}: </span>
                 <span class="message">${data.message}</span>
                 <div class="time">${when}</div>
@@ -26,11 +26,17 @@ class ChatUI {
 
         this.list.innerHTML += html;
     }
-    renderRooms(data){
+    // this is where i left off so we want to render the single room that was added 
+    renderRooms(rm){
+            const html = `<button class="btn btn-outline-danger" id="${rm}">#${rm}</button>`
+            this.roomList.innerHTML += html;
         
-        const html = `
-            <button class="btn btn-outline-danger" id="${data.room}">#${data.room}</button>
-            `       
-        this.roomList.innerHTML += html;
+
+    }
+
+    renderList_rooms(data){ //i need to create a div tag in the html for it to output out
+
+        const html = `<li> ${data.roomName}</li>`
+        this.listOfRooms.innerHTML += html
     }
 }

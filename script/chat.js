@@ -5,67 +5,95 @@
 
 class Chatroom {
     constructor(room, username){
-        this.room = room;
-        this.username = username;
-        this.chats = db.collection('chats');
-        this.unsub;
-        this.arr = [];
+      this.room = room; // chat
+      this.username = username; // chat
+      this.chats = db.collection('chats');
+      this.dbRoom = db.collection('rooms'); // rooms
+
+      this.unsub;
     }
     async addChat(message){
-        //format a chat object
-        const now = new Date();
-        const chat = {
-            message, 
-            username: this.username,
-            room: this.room,
-            created_at: firebase.firestore.Timestamp.fromDate(now)
-        };
-        // save the chat document
-        const response = await this.chats.add(chat);
-        return response; 
+      // format a chat object
+      const now = new Date();
+      const chat = {
+        message: message,
+        username: this.username,
+        room: this.room,
+        created_at: firebase.firestore.Timestamp.fromDate(now)
+      };
+      // save the chat document
+      const response = await this.chats.add(chat);
+      return response;
+    }
+    list_rooms(callback){
+        this.dbRoom
+        .onSnapshot(snapshot => {
+            snapshot.docChanges().forEach(
+                change => callback(change.doc.data())
+            )
+        })
+
     }
     getChats(callback){
-        this.unsub = this.chats
-        .where('room', '==', this.room )
+      this.unsub = this.chats
+        .where('room', '==', this.room)
         .orderBy('created_at')
         .onSnapshot(snapshot => {
-            snapshot.docChanges().forEach(change => {
-                if(change.type === 'added'){
-                    //update the ui
-                    callback(change.doc.data());
+          snapshot.docChanges().forEach(change => {
+            if(change.type === 'added'){
+              callback(change.doc.data());
+            }
+          });
+      });
+    }
+
+    // Checker function to verify if room already exists
+    async checker(roomAdded) {
+        try {
+            const snapshot = await this.dbRoom.get();
+            let roomExists = false;
+            
+            snapshot.docs.forEach(doc => {
+                if (doc.data().roomName === roomAdded) {
+                    roomExists = true;
                 }
             });
-        });
-    }
-    getRooms(callback){
-        this.chats.onSnapshot(snapshot => {
-            snapshot.docChanges().forEach(change => {
-                this.arr += change.doc.data().room 
-                let tempRoom = change.doc.data().room
-                if(!this.arr.includes(tempRoom)){// it never runs this function
-                    console.log('testing');
-                    this.arr+= tempRoom;
-                    callback(change.doc.data())
-                }else{console.log("room already added")}
-                
-            });
-            
-        });
-    }
-    updateName(username){//takes in a string
-        this.username = username;
-        localStorage.setItem('username', username);
-    }
-    updateRoom(room){//takes in a string
-        this.room = room;
-        console.log('room updated');
-        localStorage.setItem('room', room)
-        if(this.unsub){
-            this.unsub();
+            return !roomExists; // Return true if room does not exist
+        } catch (err) {
+            console.error('Error checking room:', err);
+            return false;
         }
-
     }
-}
 
+    async addRoom(roomName){
+        const room = {
+            roomName
+        }
+        const response = await this.dbRoom.add(room)
+        return response;
+    }
 
+    getRoom(callback, newRoom){
+        this.dbRoom.get()
+        .then(snapshot => {
+            snapshot.docs.forEach( doc => {
+                if(doc.data().roomName == newRoom){
+                    callback(doc.data().roomName)
+                }
+            })
+        })
+        .catch(err => console.log(err))
+     }
 
+    updateName(username){
+      this.username = username;
+      localStorage.username = username;
+    }
+    updateRoom(room){
+      this.room = room;
+      console.log('room updated');
+      if(this.unsub){
+        this.unsub();
+      }
+    }
+  }
