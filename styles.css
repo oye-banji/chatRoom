@@ -24,6 +24,8 @@
     text-align: center;
     margin: 20px auto;
   }
+
+/* tabs */
   .tabs > ul{
     padding: 0;
   }
@@ -52,4 +54,12 @@
   .tabs .content.active{
     display: block;
   }
-  
+/* Initially hide the dropdown menu */
+.dropdown-menu {
+  display: none;
+}
+
+/* Show the dropdown menu when the 'active' class is added */
+.dropdown-menu.active {
+  display: block;
+}

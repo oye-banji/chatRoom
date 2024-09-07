@@ -34,9 +34,12 @@ class ChatUI {
 
     }
 
-    renderList_rooms(data){ //i need to create a div tag in the html for it to output out
-
-        const html = `<li> ${data.roomName}</li>`
-        this.listOfRooms.innerHTML += html
-    }
+    renderList_rooms(data) {
+        const html = `<li class="dropdown-item" id="#${data.roomName}">${data.roomName}</li>`;
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        dropdownMenu.innerHTML += html;
+      
+        // Reinitialize event listeners after adding new items
+        initializeEventListeners();
+      }
 }

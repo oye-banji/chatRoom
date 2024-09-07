@@ -17,12 +17,9 @@
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
                 <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
+                  All Rooms
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
             </ul>
@@ -36,7 +33,7 @@
         <!-- buttons for chatrooms -->
         <div class="chat-rooms mb-3 text-center">
             <div class="my-2">Choose a chatroom:</div>
-            <button class="btn btn-outline-danger" id="general">#general</button>
+            <button class="btn btn-outline-danger active" id="general">#general</button>
         </div>
 
 
@@ -49,10 +46,7 @@
         <!-- new chat form -->
         <form class="new-chat my-3">
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text bg-secondary-subtle ">Your message:</div>
-                </div>
-                <input type="text" id="message" class="form-control bg-secondary-subtle border border-secondary" required>
+                <input type="text" id="message" class="form-control bg-secondary-subtle border border-secondary" placeholder="message">
                 <div class="input-group-append">
                     <input type="submit" class="btn btn-outline-success" value="send">
                 </div>
@@ -61,10 +55,7 @@
         <!-- update name form -->
         <form class="new-name my-3">
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text bg-secondary-subtle">Update name:</div>
-                </div>
-                <input type="text" id="name" class="form-control bg-secondary-subtle border border-secondary" required>
+                <input type="text" id="name" class="form-control bg-secondary-subtle border border-secondary" placeholder="Update Name">
                 <div class="input-group-append">
                     <input type="submit" class="btn btn-outline-success" value="update">
                 </div>
@@ -75,25 +66,12 @@
           <!-- Add a chatroom -->
         <form class="new-room my-3">
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text bg-secondary-subtle">Add new room:</div>
-                </div>
-                <input type="text" id="room" class="form-control bg-secondary-subtle border border-secondary" required>
+                <input type="text" id="room" class="form-control bg-secondary-subtle border border-secondary" placeholder="Add Room" required>
                 <div class="input-group-append">
                     <input type="submit" class="btn btn-outline-success" value="new">
                 </div>
             </div>
         </form>
-
-        <div class="tabs">
-            <ul>
-              <li class="trigger active" data-target="#about">All Rooms</li>
-            </ul>
-            <div id="about" class="content active bg-secondary-subtle">
-              <h3>Rooms already created</h3>
-              <h6>Click room of choice to be added</h6>
-            </div>
-        </div>
         
             
 
