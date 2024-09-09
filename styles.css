@@ -1,62 +1,63 @@
-/* .bg{
-    background-color: rgb(196, 238, 247);
-} */
-.container{
-    max-width: 600px;
-    
-  }
-  .btn{
-    color: black;
-    outline: none !important;
-    box-shadow: none !important;
-  }
-  .btn:focus{
-    outline: none !important;
-  }
-  .username{
-    font-weight: bold;
-  }
-  .time{
-    font-size: 0.7em;
-    color: #6c6b6b;
-  }
-  .update-mssg{
-    text-align: center;
-    margin: 20px auto;
-  }
+.fixed-forms-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(22, 22, 53); /* Optional: background color to make it stand out */
+  border-top: 1px solid #dee2e6; /* Optional: border to distinguish it from the rest of the content */
+  z-index: 1000; /* Ensure it stays on top of other content */
+  padding: 10px;
+}
 
-/* tabs */
-  .tabs > ul{
-    padding: 0;
+/* Adjust individual forms if needed */
+.fixed-forms-container .form-group {
+  margin-bottom: 10px;
+}
+
+/* Optional: Add some spacing between forms */
+.fixed-forms-container .form-group:not(:last-child) {
+  margin-bottom: 15px;
+}
+.container{
+    max-width: 1000px;
   }
-  .tabs > ul{
-    padding: 0;
-  }
-  .tabs .trigger{
-    list-style-type: none;
-    padding: 10px;
-    background: #020202;
-    margin: 4px;
-    border-radius: 6px;
-    display: inline-block;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  .tabs .trigger.active{
-    background: #ff6565;
-    color: white;
-  }
-  .tabs .content{
-    padding: 10px 20px;
-    border-radius: 6px;
-    display: none;
-  }
-  .tabs .content.active{
-    display: block;
-  }
+.bg{
+  background: rgb(22, 22, 53);
+}
+.btn{
+  outline: none !important;
+  box-shadow: none !important;
+}
+.btn:focus{
+  outline: none !important;
+}
+.username{
+  font-weight: bold;
+}
+.time{
+  font-size: 0.7em;
+  color: #6c6b6b;
+}
+.update-mssg{
+  text-align: center;
+  margin: 20px auto;
+}
+.addroom-mssg{
+  text-align: center;
+  margin: 20px auto;
+}
+
+.btn-inf{
+  background: rgb(22, 22, 53);
+  color: aqua;
+}
+.texty{
+  color: rgb(22, 22, 53);
+}
 /* Initially hide the dropdown menu */
 .dropdown-menu {
   display: none;
+  background: rgb(22, 22, 53);
 }
 
 /* Show the dropdown menu when the 'active' class is added */
