@@ -11,9 +11,12 @@ const roomDrop = document.querySelectorAll('.dropdown-item');
 const addroomMssg = document.querySelector('.addroom-mssg')
 const btnRooms = rooms.querySelectorAll('.btn')
 
+// check local storage for name
+const username = localStorage.username ? localStorage.username : 'anon';
+const room = localStorage.room ? localStorage.room : 'general';
+const list = localStorage.getItem("myListKey")
 
 //ADDING ITEM TO LOCAL STORAGE
-
 function addItemToList(newItem) {
   // Retrieve the existing list from local storage
   let list = localStorage.getItem('myListKey');
@@ -160,10 +163,7 @@ function initializeEventListeners(){
 
 
 
-// check local storage for name
-const username = localStorage.username ? localStorage.username : 'anon';
-const room = localStorage.room ? localStorage.room : 'general';
-const list = localStorage.getItem("myListKey")
+
 
 
 
