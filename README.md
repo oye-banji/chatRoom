@@ -15,4 +15,4 @@ Future Plans
 - Media Sharing: Add support for sharing images, files, and other media within chat rooms.
 - User Management: Handle user authentication and manage user access within chat rooms.
 
-Chat room can be previewed here: 
+Chat room can be previewed here: chat-room-eight-sigma.vercel.app
