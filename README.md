@@ -15,4 +15,4 @@ Future Plans
 - Media Sharing: Add support for sharing images, files, and other media within chat rooms.
 - User Management: Handle user authentication and manage user access within chat rooms.
 
-ChatRoom can be previewed here: chat-room-35yoqzqdd-banjis-projects-35120b6b.vercel.app
+ChatRoom can be previewed here: https://chat-room-35yoqzqdd-banjis-projects-35120b6b.vercel.app/
