@@ -6,12 +6,20 @@
   background-color: rgb(22, 22, 53); /* Optional: background color to make it stand out */
   border-top: 1px solid #dee2e6; /* Optional: border to distinguish it from the rest of the content */
   z-index: 1000; /* Ensure it stays on top of other content */
-  padding: 10px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }
 
 /* Adjust individual forms if needed */
 .fixed-forms-container .form-group {
-  margin-bottom: 10px;
+  width: 50%; /* Adjust based on your design */
+  display: flex;
+  justify-content: center;
+  
 }
 
 /* Optional: Add some spacing between forms */

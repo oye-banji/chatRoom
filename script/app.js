@@ -13,8 +13,11 @@ const btnRooms = rooms.querySelectorAll('.btn')
 
 // check local storage for name
 const username = localStorage.username ? localStorage.username : 'anon';
-const room = localStorage.room ? localStorage.room : 'general';
+const room = localStorage.room ? localStorage.room :'general';
+addItemToList('general')
 const list = localStorage.getItem("myListKey")
+
+
 
 //ADDING ITEM TO LOCAL STORAGE
 function addItemToList(newItem) {
@@ -105,14 +108,14 @@ addRoomForm.addEventListener('submit', async e => {
 
 // UPDATES THE NEW CHAT ROOM WHEN CLICKED, RENDERS EXISTING CHAT IF AVAILABLE
 rooms.addEventListener('click', e => {
-  if(e.target.tagName === 'BUTTON'){
+  if(e.target.tagName === 'BUTTON'){}
     chatUI.clear();
     chatroom.updateRoom(e.target.getAttribute('id'));
     chatroom.getChats(chat => chatUI.render(chat));
   
      handleRoomClick(e);
   }
-});
+);
 
 // HIGHLIGHTS BUTTON FOR ACTIVE ROOM-EASE OF THE USER
 function handleRoomClick(e) {
@@ -170,7 +173,7 @@ function initializeEventListeners(){
 
 // class instances
 const chatUI = new ChatUI(chatList, rooms, dropdownMenu);
-const chatroom = new Chatroom('general', username);
+const chatroom = new Chatroom(room, username);
 
 // get chats & render
 chatroom.getChats(data => chatUI.render(data));
